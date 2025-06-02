@@ -1,0 +1,34 @@
+server:
+  port: 8080 # Server Port
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB    # Maximum size for a single file (e.g., 50 Megabytes)
+      max-request-size: 55MB # Maximum size for the entire request (should be >= max-file-size)
+      # Uncomment and set to true if you want to explicitly enable multipart parsing (usually true by default)
+      # enabled: true
+  datasource:
+    url: jdbc:h2:mem:facialdb # H2 Database Configuration (in-memory for development)
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect # JPA and Hibernate Configuration
+    hibernate:
+      ddl-auto: update # ddl-auto: update schema if necessary.
+    show-sql: true # Show SQL queries in console
+    properties:
+      hibernate:
+        format_sql: true # Format SQL queries for better readability
+  application:
+    name: facial recognition
+
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG # Logging configuration for request filter
+    com.example.facialrecognition: DEBUG # Logging for our application package
+# Facial Recognition Strategy Configuration
+facial:
+  recognition:
+    strategy: opencv # Options: 'mock' or 'opencv'
